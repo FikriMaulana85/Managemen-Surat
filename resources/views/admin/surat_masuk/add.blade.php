@@ -13,7 +13,8 @@
                             {{ session('alert') }}
                         </div>
                     @endif
-                    <form class="forms-sample" action="{{ url('surat_masuk/add') }}" method="POST">
+                    <form class="forms-sample" action="{{ url('surat_masuk/add') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group @error('tanggal_surat') has-danger @enderror">
@@ -69,7 +70,7 @@
                         <div class="form-group @error('nomor_agenda') has-danger @enderror">
                             <label for="nomor_agenda">No Agenda</label>
                             <input type="text" class="form-control" id="nomor_agenda" name="nomor_agenda"
-                                placeholder="No Agenda" required>
+                                placeholder="No Agenda" value="{{ $kode_agenda }}" required>
                             @error('nomor_agenda')
                                 <label class="error mt-2 text-danger" for="nomor_agenda">{{ $message }}</label>
                             @enderror
@@ -93,16 +94,28 @@
                             @enderror
                         </div>
 
-                        <div class="form-group @error('tanggal_terima') has-danger @enderror">
+                        <div class="form-group @error('file_surat') has-danger @enderror">
+                            <label>Upload Surat</label>
+                            <input type="file" name="img[]" class="file-upload-default">
+                            <div class="input-group col-xs-12">
+                                <input type="file" name="file_surat" class="form-control file-upload-info"
+                                    placeholder="Upload Surat" accept="application/pdf" required>
+                            </div>
+                            @error('file_surat')
+                                <label class="error mt-2 text-danger" for="file_surat">{{ $message }}</label>
+                            @enderror
+                        </div>
+
+                        {{-- <div class="form-group @error('tanggal_terima') has-danger @enderror">
                             <label for="tanggal_terima">Tanggal Terima</label>
                             <input type="date" class="form-control" id="tanggal_terima" name="tanggal_terima"
                                 placeholder="Tanggal Terima">
                             @error('tanggal_terima')
                                 <label class="error mt-2 text-danger" for="tanggal_terima">{{ $message }}</label>
                             @enderror
-                        </div>
+                        </div> --}}
 
-                        <div class="form-group @error('id_disposisi') has-danger @enderror ">
+                        {{-- <div class="form-group @error('id_disposisi') has-danger @enderror ">
                             <label>Status Surat Masuk</label>
                             <select class="js-example-basic-single select2-hidden-accessible" style="width:100%"
                                 tabindex="-1" aria-hidden="true" name="id_disposisi" required>"
@@ -116,7 +129,7 @@
                             @error('id_disposisi')
                                 <label class="error mt-2 text-danger" for="id_disposisi">{{ $message }}</label>
                             @enderror
-                        </div>
+                        </div> --}}
 
                         <button type="submit" class="btn btn-primary mr-2">Simpan</button>
                         <button class="btn btn-light" onclick="history.back()">Kembali</button>

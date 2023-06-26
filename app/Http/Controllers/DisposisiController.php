@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Disposisi;
+use App\Models\Suratmasuk;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 class DisposisiController extends Controller
 {
@@ -16,7 +18,7 @@ class DisposisiController extends Controller
     public function index()
     {
         $data = [
-            'lists' => Disposisi::orderBy('id', 'DESC')->get(),
+            'lists' => Disposisi::with(['suratmasuk'])->orderBy('status_disposisi', 'DESC')->get(),
             'user' => User::get()
         ];
         return view("admin.disposisi.list", $data);
@@ -30,6 +32,7 @@ class DisposisiController extends Controller
     public function create()
     {
         $data = [
+            'surat_masuk' => Suratmasuk::get(),
             'user' => User::get()
         ];
         return view("admin.disposisi.add", $data);
@@ -44,7 +47,10 @@ class DisposisiController extends Controller
     public function store(Request $request)
     {
         $Datas = $request->validate([
-            'nama_disposisi' => 'required',
+            'id_suratmasuk' => 'required',
+            'catatan_disposisi' => 'required',
+            'status_disposisi' => 'required',
+            'tanggal_disposisi' => 'required'
         ]);
         Disposisi::create($Datas);
         return redirect('disposisi')->with('alert', 'Data berhasil disimpan.');
@@ -58,6 +64,14 @@ class DisposisiController extends Controller
      */
     public function show($id)
     {
+        $data = [
+            'show' => Disposisi::with(['suratmasuk'])->where("id", $id)->get(),
+            'user' => User::get()
+        ];
+        // return view("admin.surat_masuk.disposisi");
+        $pdf = FacadePdf::loadView('admin.disposisi.disposisi', $data)->setPaper('a4', 'potrait');
+        // return $pdf->download('disposisi.pdf');
+        return $pdf->stream('disposisi.pdf');
     }
 
     /**
@@ -69,7 +83,8 @@ class DisposisiController extends Controller
     public function edit(disposisi $id)
     {
         $data = [
-            'show' => $id,
+            'show' => $id->with('suratmasuk')->get(),
+            'surat_masuk' => Suratmasuk::get(),
             'user' => User::get()
         ];
         return view("admin.disposisi.edit", $data);
@@ -85,7 +100,10 @@ class DisposisiController extends Controller
     public function update(Request $request, disposisi $id)
     {
         $Datas = $request->validate([
-            'nama_disposisi' => 'required',
+            'id_suratmasuk' => 'required',
+            'catatan_disposisi' => 'required',
+            'status_disposisi' => 'required',
+            'tanggal_disposisi' => 'required'
         ]);
 
         Disposisi::where('id', $id->id)->update($Datas);

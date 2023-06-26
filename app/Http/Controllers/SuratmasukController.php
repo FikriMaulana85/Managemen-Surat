@@ -40,6 +40,7 @@ class SuratmasukController extends Controller
             'disposisis' => Disposisi::all(),
             'jenis_surats' => Jenissurat::all(),
             'divisis' => Divisi::all(),
+            'kode_agenda' => sprintf("%03s", Suratmasuk::count() + 1),
             'user' => User::get()
         ];
         return view("admin.surat_masuk.add", $data);
@@ -57,14 +58,18 @@ class SuratmasukController extends Controller
         $Datas = $request->validate([
             'id_divisi' => 'required',
             'id_jenis_surat' => 'required',
-            'id_disposisi' => 'required',
             'nomor_agenda' => 'required',
             'nomor_surat_masuk' => 'required',
             'sumber_surat_masuk' => 'required',
             'deskripsi_surat_masuk' => 'required',
             'tanggal_surat' => 'required',
-            'tanggal_terima' => '',
+            'file_surat' => 'required|file|mimes:pdf',
+            // 'tanggal_terima' => '',
         ]);
+        $file = $request->file('file_surat');
+        $tujuan_upload = 'storage/surat_masuk';
+        $file->move($tujuan_upload, md5($file->getClientOriginalName()) . ".pdf");
+        $Datas['file_surat'] =  md5($file->getClientOriginalName()) . ".pdf";
         Suratmasuk::create($Datas);
         return redirect('surat_masuk')->with('alert', 'Data berhasil disimpan.');
     }
@@ -121,15 +126,20 @@ class SuratmasukController extends Controller
         $Datas = $request->validate([
             'id_divisi' => 'required',
             'id_jenis_surat' => 'required',
-            'id_disposisi' => 'required',
             'nomor_agenda' => 'required',
             'nomor_surat_masuk' => 'required',
             'sumber_surat_masuk' => 'required',
             'deskripsi_surat_masuk' => 'required',
             'tanggal_surat' => 'required',
-            'tanggal_terima' => '',
         ]);
 
+        if ($request->file_surat) {
+            $file = $request->file('file_surat');
+            $tujuan_upload = 'storage/surat_masuk';
+            $file->move($tujuan_upload, md5($file->getClientOriginalName()) . ".pdf");
+            $Datas['file_surat'] =  md5($file->getClientOriginalName()) . ".pdf";
+        }
+        // dd($Datas);
         Suratmasuk::where('id', $id->id)->update($Datas);
         return redirect('surat_masuk')->with('alert', 'Data berhasil diubah');
     }

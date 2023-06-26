@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/disposisi/edit/{id}', [DisposisiController::class, 'edit']);
     Route::put('/disposisi/edit/{id}', [DisposisiController::class, 'update']);
     Route::delete('/disposisi/delete/{id}', [DisposisiController::class, 'destroy']);
+    Route::get('/disposisi/details/{id}', [DisposisiController::class, 'show']);
 
     //JENIS SURAT
     Route::get('/jenis_surat', [JenissuratController::class, 'index']);
@@ -82,7 +83,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/surat_masuk/edit/{id}', [SuratmasukController::class, 'edit']);
     Route::put('/surat_masuk/edit/{id}', [SuratmasukController::class, 'update']);
     Route::delete('/surat_masuk/delete/{id}', [SuratmasukController::class, 'destroy']);
-    Route::get('/surat_masuk/details/{id}', [SuratmasukController::class, 'show']);
 
 
     //SURAT KELUAR

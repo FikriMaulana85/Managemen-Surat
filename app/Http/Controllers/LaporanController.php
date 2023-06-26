@@ -35,8 +35,9 @@ class LaporanController extends Controller
             'show' => $id->with(['divisi', 'jenis_surat', 'disposisi'])->whereBetween(DB::raw('DATE(created_at)'), [$request->tanggal_awal, $request->tanggal_akhir])->get(),
             'user' => User::get()
         ];
+        // dd($data);
         $pdf = Pdf::loadView('admin.laporan.lapmasuk_pdf', $data)->setPaper('a4', 'landscape');
-        return $pdf->stream('');
+        return $pdf->stream('lapmasuk_pdf');
     }
 
     public function cetak_keluar(Request $request, Suratkeluar $id)

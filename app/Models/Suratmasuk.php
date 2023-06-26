@@ -25,6 +25,6 @@ class Suratmasuk extends Model
 
     public function disposisi()
     {
-        return $this->belongsTo(Disposisi::class, 'id_disposisi');
+        return $this->belongsTo(Disposisi::class);
     }
 }

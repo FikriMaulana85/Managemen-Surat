@@ -67,7 +67,6 @@
     <table width="100%" cellspacing="0" cellpadding="0" align="center">
         <thead>
             <tr>
-                <td class="tdrh">Tgl Terima</th>
                 <td class="tdrh">No Agenda</th>
                 <td class="tdrh">No Surat</th>
                 <td class="tdrh">Tgl Surat</th>
@@ -81,7 +80,6 @@
         <tbody>
             @foreach ($show as $list)
                 <tr>
-                    <td class="tdrc1">{{ $list->created_at }}</td>
                     <td class="tdrc1">{{ $list->nomor_agenda }}</td>
                     <td class="tdrc1">{{ $list->nomor_surat_keluar }}</td>
                     <td class="tdrc1">{{ $list->tanggal_surat }}</td>

@@ -37,6 +37,7 @@ class SuratkeluarCOntroller extends Controller
         $data = [
             'jenis_surats' => Jenissurat::all(),
             'divisis' => Divisi::all(),
+            'kode' => sprintf("%03s", Suratkeluar::count() + 1),
             'user' => User::get()
         ];
         return view("admin.surat_keluar.add", $data);
@@ -58,7 +59,12 @@ class SuratkeluarCOntroller extends Controller
             'kepada_surat_keluar' => 'required',
             'deskripsi_surat_keluar' => 'required',
             'tanggal_surat' => 'required',
+            'file_surat' => 'required|file|mimes:pdf',
         ]);
+        $file = $request->file('file_surat');
+        $tujuan_upload = 'storage/surat_keluar';
+        $file->move($tujuan_upload, md5($file->getClientOriginalName()) . ".pdf");
+        $Datas['file_surat'] =  md5($file->getClientOriginalName()) . ".pdf";
         Suratkeluar::create($Datas);
         return redirect('surat_keluar')->with('alert', 'Data berhasil disimpan.');
     }
@@ -117,7 +123,12 @@ class SuratkeluarCOntroller extends Controller
             'deskripsi_surat_keluar' => 'required',
             'tanggal_surat' => 'required',
         ]);
-
+        if ($request->file_surat) {
+            $file = $request->file('file_surat');
+            $tujuan_upload = 'storage/surat_masuk';
+            $file->move($tujuan_upload, md5($file->getClientOriginalName()) . ".pdf");
+            $Datas['file_surat'] =  md5($file->getClientOriginalName()) . ".pdf";
+        }
         Suratkeluar::where('id', $id->id)->update($Datas);
         return redirect('surat_keluar')->with('alert', 'Data berhasil diubah');
     }

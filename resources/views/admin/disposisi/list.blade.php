@@ -23,7 +23,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Disposisi</th>
+                                    <th>Nomor Surat Masuk</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -32,10 +33,13 @@
                                 @foreach ($lists as $list)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $list->nama_disposisi }}</td>
+                                        <td>{{ $list->suratmasuk->nomor_surat_masuk }}</td>
+                                        <td>{{ $list->status_disposisi }}</td>
                                         <td>
                                             <a href="{{ url('disposisi/edit/' . $list->id . '') }}"
                                                 class="btn btn-outline-info"><i class="mdi mdi-pencil"></i></a>
+                                            <a href="{{ url('disposisi/details/' . $list->id . '') }}"
+                                                class="btn btn-outline-warning"><i class="mdi mdi-printer"></i></a>
                                             <form action="{{ url('disposisi/delete/' . $list->id) }}" method="post"
                                                 class="d-inline">
                                                 @method('delete')

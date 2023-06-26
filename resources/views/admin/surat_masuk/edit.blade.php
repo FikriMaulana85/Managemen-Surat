@@ -15,7 +15,8 @@
                     @endif
 
 
-                    <form class="forms-sample" action="{{ url('surat_masuk/edit/' . $show[0]->id . '') }}" method="POST">
+                    <form class="forms-sample" action="{{ url('surat_masuk/edit/' . $show[0]->id . '') }}" method="POST"
+                        enctype="multipart/form-data">
                         @method('put')
                         @csrf
 
@@ -98,7 +99,18 @@
                             @enderror
                         </div>
 
-                        <div class="form-group @error('tanggal_terima') has-danger @enderror">
+                        <div class="form-group @error('file_surat') has-danger @enderror">
+                            <label>Upload Surat</label>
+                            <input type="file" name="img[]" class="file-upload-default">
+                            <div class="input-group col-xs-12">
+                                <input type="file" name="file_surat" class="form-control file-upload-info"
+                                    placeholder="Upload Surat" accept="application/pdf">
+                            </div>
+                            @error('file_surat')
+                                <label class="error mt-2 text-danger" for="file_surat">{{ $message }}</label>
+                            @enderror
+                        </div>
+                        {{-- <div class="form-group @error('tanggal_terima') has-danger @enderror">
                             <label for="tanggal_terima">Tanggal Terima</label>
                             <input type="date" class="form-control" id="tanggal_terima" name="tanggal_terima"
                                 placeholder="Tanggal Terima" value="{{ $show[0]->tanggal_terima }}">
@@ -121,7 +133,7 @@
                             @error('id_disposisi')
                                 <label class="error mt-2 text-danger" for="id_disposisi">{{ $message }}</label>
                             @enderror
-                        </div>
+                        </div> --}}
 
 
                         <button type="submit" class="btn btn-primary mr-2">Ubah</button>

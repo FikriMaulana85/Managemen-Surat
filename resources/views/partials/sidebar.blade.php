@@ -20,11 +20,17 @@
                         <li class="nav-item"> <a class="nav-link" href="{{ url('role') }}">Role </a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ url('divisi') }}">Divisi</a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ url('jenis_surat') }}">Jenis Surat</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ url('disposisi') }}">Disposisi</a></li>
                     </ul>
                 </div>
             </li>
         @endif
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('disposisi') }}">
+                <i class="mdi mdi-file menu-icon"></i>
+                <span class="menu-title">Disposisi</span>
+            </a>
+        </li>
 
         <li class="nav-item">
             <a class="nav-link" href="{{ url('surat_masuk') }}">
@@ -53,7 +59,8 @@
                         <li class="nav-item"> <a class="nav-link" href="{{ url('laporan/surat_masuk') }}">Laporan Surat
                                 Masuk
                             </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ url('laporan/surat_keluar') }}">Laporan Surat
+                        <li class="nav-item"> <a class="nav-link" href="{{ url('laporan/surat_keluar') }}">Laporan
+                                Surat
                                 Keluar</a></li>
                     </ul>
                 </div>

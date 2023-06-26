@@ -15,7 +15,8 @@
                     @endif
 
 
-                    <form class="forms-sample" action="{{ url('surat_keluar/edit/' . $show[0]->id . '') }}" method="POST">
+                    <form class="forms-sample" action="{{ url('surat_keluar/edit/' . $show[0]->id . '') }}" method="POST"
+                        enctype="multipart/form-data">
                         @method('put')
                         @csrf
 
@@ -96,6 +97,18 @@
                                 cols="3" rows="4" required>{{ $show[0]->deskripsi_surat_keluar }}</textarea>
                             @error('deskripsi_surat_keluar')
                                 <label class="error mt-2 text-danger" for="deskripsi_surat_keluar">{{ $message }}</label>
+                            @enderror
+                        </div>
+
+                        <div class="form-group @error('file_surat') has-danger @enderror">
+                            <label>Upload Surat</label>
+                            <input type="file" name="img[]" class="file-upload-default">
+                            <div class="input-group col-xs-12">
+                                <input type="file" name="file_surat" class="form-control file-upload-info"
+                                    placeholder="Upload Surat" accept="application/pdf">
+                            </div>
+                            @error('file_surat')
+                                <label class="error mt-2 text-danger" for="file_surat">{{ $message }}</label>
                             @enderror
                         </div>
 

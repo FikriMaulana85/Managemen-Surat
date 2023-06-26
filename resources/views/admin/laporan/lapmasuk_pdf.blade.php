@@ -67,7 +67,6 @@
     <table width="100%" cellspacing="0" cellpadding="0" align="center">
         <thead>
             <tr>
-                <td class="tdrh">Tgl Terima</th>
                 <td class="tdrh">No Agenda</th>
                 <td class="tdrh">No Surat</th>
                 <td class="tdrh">Tgl Surat</th>
@@ -75,13 +74,11 @@
                 <td class="tdrh">Dari</th>
                 <td class="tdrh">Kepada</th>
                 <td class="tdrh">Kode Klasifikasi</th>
-                <td class="tdrh">Ket</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($show as $list)
                 <tr>
-                    <td class="tdrc1">{{ $list->tanggal_terima }}</td>
                     <td class="tdrc1">{{ $list->nomor_agenda }}</td>
                     <td class="tdrc1">{{ $list->nomor_surat_masuk }}</td>
                     <td class="tdrc1">{{ $list->tanggal_surat }}</td>
@@ -89,7 +86,6 @@
                     <td class="tdrc1">{{ $list->sumber_surat_masuk }}</td>
                     <td class="tdrc1">{{ $list->divisi->nama_divisi }}</td>
                     <td class="tdrc1">{{ $list->jenis_surat->kode_jenis_surat }}</td>
-                    <td class="tdrc1">{{ $list->disposisi->nama_disposisi }}</td>
                 </tr>
             @endforeach
         </tbody>

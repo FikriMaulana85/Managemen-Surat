@@ -22,6 +22,7 @@ class CreateSuratkeluarsTable extends Migration
             $table->string("kepada_surat_keluar", 50);
             $table->text("deskripsi_surat_keluar");
             $table->date("tanggal_surat");
+            $table->string("file_surat", 50);
             $table->timestamps();
         });
     }

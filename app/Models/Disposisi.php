@@ -11,4 +11,9 @@ class Disposisi extends Model
     protected $primaryKey = 'id';
 
     protected $guarded = ['id'];
+
+    public function suratmasuk()
+    {
+        return $this->belongsTo(Suratmasuk::class, 'id_suratmasuk');
+    }
 }

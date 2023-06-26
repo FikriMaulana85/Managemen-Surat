@@ -22,7 +22,6 @@
                         <table id="order-listing" class="table">
                             <thead>
                                 <tr>
-                                    <th>Tgl Terima</th>
                                     <th>No Agenda</th>
                                     <th>No Surat</th>
                                     <th>Tgl Surat</th>
@@ -30,7 +29,6 @@
                                     <th>Dari</th>
                                     <th>Kepada</th>
                                     <th>Kode Klasifikasi</th>
-                                    <th>Ket</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -38,7 +36,6 @@
                                 {{-- @dump($lists) --}}
                                 @foreach ($lists as $list)
                                     <tr>
-                                        <td>{{ $list->tanggal_terima }}</td>
                                         <td>{{ $list->nomor_agenda }}</td>
                                         <td>{{ $list->nomor_surat_masuk }}</td>
                                         <td>{{ $list->tanggal_surat }}</td>
@@ -46,12 +43,12 @@
                                         <td>{{ $list->sumber_surat_masuk }}</td>
                                         <td>{{ $list->divisi->nama_divisi }}</td>
                                         <td>{{ $list->jenis_surat->kode_jenis_surat }}</td>
-                                        <td>{{ $list->disposisi->nama_disposisi }}</td>
                                         <td>
                                             <a href="{{ url('surat_masuk/edit/' . $list->id . '') }}"
                                                 class="btn btn-outline-info"><i class="mdi mdi-pencil"></i></a>
-                                            <a href="{{ url('surat_masuk/details/' . $list->id . '') }}"
-                                                class="btn btn-outline-primary"><i class="mdi mdi-printer"></i></a>
+                                            <a target="_blank"
+                                                href="{{ url('storage/surat_masuk/' . $list->file_surat . '') }}"
+                                                class="btn btn-outline-primary"><i class="mdi mdi-eye"></i></a>
                                             <form action="{{ url('surat_masuk/delete/' . $list->id) }}" method="post"
                                                 class="d-inline">
                                                 @method('delete')

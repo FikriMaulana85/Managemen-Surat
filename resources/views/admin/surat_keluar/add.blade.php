@@ -13,7 +13,8 @@
                             {{ session('alert') }}
                         </div>
                     @endif
-                    <form class="forms-sample" action="{{ url('surat_keluar/add') }}" method="POST">
+                    <form class="forms-sample" action="{{ url('surat_keluar/add') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group @error('tanggal_surat') has-danger @enderror">
@@ -70,7 +71,7 @@
                         <div class="form-group @error('nomor_agenda') has-danger @enderror">
                             <label for="nomor_agenda">No Agenda</label>
                             <input type="text" class="form-control" id="nomor_agenda" name="nomor_agenda"
-                                placeholder="No Agenda" required>
+                                placeholder="No Agenda" value="{{ $kode }}" required>
                             @error('nomor_agenda')
                                 <label class="error mt-2 text-danger" for="nomor_agenda">{{ $message }}</label>
                             @enderror
@@ -79,7 +80,7 @@
                         <div class="form-group @error('nomor_surat_keluar') has-danger @enderror">
                             <label for="nomor_surat_keluar">No Surat</label>
                             <input type="text" class="form-control" id="nomor_surat_keluar" name="nomor_surat_keluar"
-                                placeholder="No Surat" required>
+                                placeholder="No Surat" value="SK/{{ $kode }}/{{ date('dmy') }}" required>
                             @error('nomor_surat_keluar')
                                 <label class="error mt-2 text-danger" for="nomor_surat_keluar">{{ $message }}</label>
                             @enderror
@@ -94,6 +95,17 @@
                             @enderror
                         </div>
 
+                        <div class="form-group @error('file_surat') has-danger @enderror">
+                            <label>Upload Surat</label>
+                            <input type="file" name="img[]" class="file-upload-default">
+                            <div class="input-group col-xs-12">
+                                <input type="file" name="file_surat" class="form-control file-upload-info"
+                                    placeholder="Upload Surat" accept="application/pdf" required>
+                            </div>
+                            @error('file_surat')
+                                <label class="error mt-2 text-danger" for="file_surat">{{ $message }}</label>
+                            @enderror
+                        </div>
                         <button type="submit" class="btn btn-primary mr-2">Simpan</button>
                         <button class="btn btn-light" onclick="history.back()">Kembali</button>
                     </form>

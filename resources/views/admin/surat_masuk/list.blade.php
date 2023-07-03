@@ -49,16 +49,6 @@
                                             <a target="_blank"
                                                 href="{{ url('storage/surat_masuk/' . $list->file_surat . '') }}"
                                                 class="btn btn-outline-primary"><i class="mdi mdi-eye"></i></a>
-                                            <form action="{{ url('surat_masuk/delete/' . $list->id) }}" method="post"
-                                                class="d-inline">
-                                                @method('delete')
-                                                @csrf
-                                                {{-- <input type="hidden" name="id" value="{{ $list->id }}"> --}}
-                                                <button class="btn btn-outline-danger"
-                                                    onclick="return confirm('Yakin Ingin Menghapus ?');"><i
-                                                        class="mdi mdi-delete"></i></button>
-                                            </form>
-
                                         </td>
                                     </tr>
                                 @endforeach

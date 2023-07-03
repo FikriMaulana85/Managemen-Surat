@@ -20,7 +20,7 @@
         .container {
             height: 100%;
             display: flex;
-            justify-content: center;
+            /* justify-content: center; */
             /* align-
             items: center; */
         }
@@ -46,12 +46,14 @@
             <center>
                 <h3>LEMBAR DISPOSISI</h3>
             </center>
-            <table align="center">
+            <table align="center" width="600px">
                 <tbody width="500px">
                     <tr>
-                        <td style="border-right: 0px !important">Surat Dari</td>
-                        <td style="border-left: hidden;border-right: hidden;">:</td>
+                        <td style="width:120px; border-right: 0px !important">Surat Dari</td>
+                        <td style="width:1px; border-left: hidden;border-right: hidden;">:</td>
                         <td>{{ $show[0]->suratmasuk->sumber_surat_masuk }}</td>
+                    </tr>
+                    <tr>
                         <td style="border-right:0px !important">Diterima Tanggal</td>
                         <td style="border-right: hidden;border-left: hidden;">:</td>
                         <td>{{ $show[0]->tanggal_disposisi }}</td>
@@ -60,6 +62,8 @@
                         <td style="border-right: 0px !important">Tanggal Surat</td>
                         <td style="border-left: hidden;border-right: hidden;">:</td>
                         <td>{{ $show[0]->suratmasuk->tanggal_surat }}</td>
+                    </tr>
+                    <tr>
                         <td style="border-right: 0px !important">No Agendal</td>
                         <td style="border-left: hidden;border-right: hidden;">:</td>
                         <td>{{ $show[0]->suratmasuk->nomor_agenda }}</td>
@@ -68,6 +72,8 @@
                         <td>Nomor Surat</td>
                         <td style="border-left: hidden;border-right: hidden;">:</td>
                         <td>{{ $show[0]->suratmasuk->nomor_surat_masuk }}</td>
+                    </tr>
+                    <tr>
                         <td>Diterima Kepada</td>
                         <td style="border-left: hidden;border-right: hidden;">:</td>
                         <td>{{ $show[0]->suratmasuk->divisi->nama_divisi }}</td>
@@ -76,7 +82,12 @@
                         <td>Perihal</td>
                         <td style="border-left: hidden;border-right: hidden;">:</td>
                         <td>{{ $show[0]->suratmasuk->deskripsi_surat_masuk }}</td>
-                        <td colspan="3">{{ $show[0]->catatan_disposisi }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="display:flexbox; word-break:break-all; word-wrap:break-word;">Catatan
+                            : <p>
+                                {{ $show[0]->catatan_disposisi }}</p>
+                        </td>
                     </tr>
 
                 </tbody>
